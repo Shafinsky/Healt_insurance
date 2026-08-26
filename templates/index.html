@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-center mb-4">{{ title }}</h1>
+<p class="lead text-center">Flask insurance management system</p>
+
+<div class="row mt-5">
+
+  <div class="col-md-4">
+    <div class="card shadow h-100">
+      <div class="card-body text-center">
+        <h3>Policies</h3>
+        <p>Manage insurance plans</p>
+        <a href="{{ url_for('main.policies_list') }}" class="btn btn-primary">Open</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card shadow h-100">
+      <div class="card-body text-center">
+        <h3>Clients</h3>
+        <p>Management of insured persons</p>
+        <a href="{{ url_for('main.clients_list') }}" class="btn btn-success">Open</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card shadow h-100">
+      <div class="card-body text-center">
+        <h3>Insurance Claims</h3>
+        <p>View insurance claims</p>
+        <a href="{{ url_for('main.claims_list') }}" class="btn btn-warning">Open</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% if not current_user.is_authenticated %}
+<p class="text-center text-muted mt-4">
+You are viewing as guest. Login to create and edit data.
+</p>
+{% endif %}
+
+{% endblock %}

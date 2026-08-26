@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body{
+            background: linear-gradient(120deg,#3498db,#8e44ad);
+            font-family: Arial;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        .card{
+            background:white;
+            padding:40px;
+            border-radius:12px;
+            width:350px;
+            box-shadow:0 10px 30px rgba(0,0,0,.2);
+        }
+        input{
+            width:100%;
+            padding:10px;
+            margin:10px 0;
+            border:1px solid #ddd;
+            border-radius:6px;
+        }
+        button{
+            width:100%;
+            padding:12px;
+            background:#3498db;
+            color:white;
+            border:none;
+            border-radius:6px;
+            font-size:16px;
+        }
+    </style>
+</head>
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="height:80vh">
+    <div class="card shadow-lg p-4" style="width:380px">
+        <h3 class="text-center mb-4">Insurance System</h3>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ 'danger' if category == 'danger' else 'success' }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <input type="hidden" name="next" value="{{ request.args.get('next') }}">
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Увійти</button>
+        </form>
+
+        <p class="text-center mt-3">
+            Немає акаунту? <a href="{{ url_for('auth.register') }}">Зареєструватись</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+</html>
